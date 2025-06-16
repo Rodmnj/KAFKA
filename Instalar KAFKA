@@ -1,0 +1,51 @@
+🧭 Guia Rápido para Instalar o Apache Kafka (macOS)
+
+
+🔍 1. Verificar Requisitos do Sistema
+    ✅ Verifica a versão do macOS;
+    ✅ Verifica a versão do Java:
+        java -version
+    📌 Se o sistema for macOS 12, é recomendado instalar o OpenJDK 11 para compatibilidade com Kafka.
+
+☕️ 2. Instalar o Java (OpenJDK 11)
+    Acede ao site da Oracle:
+    👉 https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html
+
+Faz download do instalador para macOS:
+    jdk-11.x.x_macos-x64_bin.dmg
+
+Após instalação, confirma no terminal:
+    java -version
+
+⬇️ 3. Fazer Download do Apache Kafka
+    curl -L -O https://archive.apache.org/dist/kafka/3.7.0/kafka_2.13-3.7.0.tgz
+
+Confirma o ficheiro descarregado:
+    ls -lh kafka_2.13-3.7.0.tgz
+    # ~90–120 MB
+
+Extrai e entra na pasta:
+    tar -xzf kafka_2.13-3.7.0.tgz
+    cd kafka_2.13-3.7.0
+
+⚙️ 4. Inicializar e Iniciar o Servidor Kafka (modo KRaft)
+  🛠️ Formatar o log do cluster:
+      bin/kafka-storage.sh format -t $(bin/kafka-storage.sh random-uuid) -c config/kraft/server.properties
+  🚀 Iniciar o servidor Kafka:
+      bin/kafka-server-start.sh config/kraft/server.properties
+
+🧯 5. Problemas Comuns
+Se obtiveres erro ao iniciar o servidor (server.properties), formata novamente o cluster:
+      bin/kafka-storage.sh format -t $(bin/kafka-storage.sh random-uuid) -c config/kraft/server.properties
+
+Em seguida, tenta iniciar de novo:
+      bin/kafka-server-start.sh config/kraft/server.properties
+
+
+🌐 Links úteis
+📥 Oracle JDK 11:
+https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html
+
+📚 Apache Kafka (downloads):
+https://kafka.apache.org/downloads
+
