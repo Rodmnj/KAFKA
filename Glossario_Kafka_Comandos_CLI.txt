@@ -1,0 +1,29 @@
+# Glossário de Comandos Kafka CLI
+
+kafka-topics.sh --list --bootstrap-server <host>:<port>
+
+kafka-topics.sh --create --bootstrap-server <host>:<port> \
+  --replication-factor <num> --partitions <num> --topic <nome-do-topico>
+
+kafka-topics.sh --delete --bootstrap-server <host>:<port> --topic <nome-do-topico>
+
+kafka-topics.sh --describe --bootstrap-server <host>:<port> --topic <nome-do-topico>
+
+kafka-console-producer.sh --broker-list <host>:<port> --topic <nome-do-topico>
+
+kafka-console-consumer.sh --bootstrap-server <host>:<port> \
+  --topic <nome-do-topico> [--from-beginning]
+
+kafka-consumer-groups.sh --bootstrap-server <host>:<port> --list
+
+kafka-consumer-groups.sh --bootstrap-server <host>:<port> \
+  --describe --group <nome-do-grupo>
+
+kafka-consumer-groups.sh --bootstrap-server <host>:<port> \
+  --group <nome-do-grupo> --topic <nome-do-topico> --reset-offsets \
+  --to-earliest --execute
+
+kafka-delete-records.sh --bootstrap-server <host>:<port> \
+  --offset-json-file <ficheiro.json>
+
+kafka-topics.sh --version
