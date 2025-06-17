@@ -1,0 +1,34 @@
+Guia Prático: Modos de Entrega em Kafka com CLI
+
+1. AT-MOST-ONCE (no máximo uma vez - pode perder mensagens)
+
+	1. Produz mensagens:
+   bin/kafka-console-producer.sh --topic sensor-data --bootstrap-server localhost:9092
+
+	2. Corre o consumidor e para rapidamente (Ctrl+C):
+   bin/kafka-console-consumer.sh --topic sensor-data --group teste-perda --bootstrap-server localhost:9092
+
+Resultado:
+- Pode perder mensagens porque o offset não foi commitado antes do encerramento.
+- Simula perda = comportamento at-most-once.
+
+2. AT-LEAST-ONCE (pelo menos uma vez - pode duplicar mensagens)
+
+	1. Consome várias vezes com --from-beginning:
+   bin/kafka-console-consumer.sh --topic sensor-data --group teste-dup --from-beginning --bootstrap-server localhost:9092
+
+Resultado:
+- Todas as mensagens são entregues.
+- Algumas podem aparecer duplicadas.
+- Comportamento at-least-once.
+
+3. EXACTLY-ONCE (exatamente uma vez - sem perda nem duplicação)
+Requisitos (não testável com CLI apenas):
+- Uso de transactional.id no producer.
+- Offsets commitados dentro da transação.
+- Implementação via código (ex: Java, Python).
+
+Verificação:
+-------------
+Ver offsets e lag:
+bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group NOME_DO_GRUPO
