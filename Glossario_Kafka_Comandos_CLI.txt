@@ -27,3 +27,6 @@ kafka-delete-records.sh --bootstrap-server <host>:<port> \
   --offset-json-file <ficheiro.json>
 
 kafka-topics.sh --version
+
+PARA MAIS COMANDOS:
+https://www.redpanda.com/guides/kafka-tutorial-kafka-cheat-sheet
